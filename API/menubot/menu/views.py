@@ -5,12 +5,11 @@ from .models import Menu
 
 # Create your views here.
 
-def select_menu(request):
+def select_menu(request): # 랜덤으로 메뉴를 고름
     data = {}
     if request.method == 'GET':
         today = datetime.datetime.now(datetime.timezone.utc)
         while True:
-            # 1부터 현재 모델 갯수 -1 까지의 난수
             menu = Menu.objects.random()
             if not menu.last_date:
                 break
@@ -23,11 +22,20 @@ def select_menu(request):
         # menu.save()
     return JsonResponse(data)
 
-def ate_menu(request,pk):
+def ate_menu(request,pk): # 먹은 메뉴를 확인
     return True
 
-def create_menu(request):
+def create_menu(request): # 새로운 메뉴 생성
     return JsonResponse()
 
-def delete_menu(request):
+def delete_menu(request): # 메뉴 삭제
     return JsonResponse()
+
+def list_menu(request): # 메뉴 리스트
+    data = {}
+
+    if request.method == 'GET':
+        menus = Menu.objects.all().values()
+        data['menus'] = list(menus)
+
+    return JsonResponse(data)
