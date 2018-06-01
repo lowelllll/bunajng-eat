@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import JsonResponse
 import datetime
 from django.views.decorators.csrf import csrf_exempt
@@ -53,7 +53,22 @@ def create_menu(request): # 새로운 메뉴 생성
 
 @csrf_exempt
 def delete_menu(request): # 메뉴 삭제
-    return JsonResponse()
+    data = {}
+    flag = False
+
+    if request.method == 'POST':
+        pk = request.POST['pk']
+        try:
+            menu = get_object_or_404(Menu,pk=pk)
+            menu.delete()
+            flag = True
+        except:
+            pass
+        finally:
+            data['flag'] = flag
+
+    return JsonResponse(data)
+
 
 def list_menu(request): # 메뉴 리스트
     data = {}
