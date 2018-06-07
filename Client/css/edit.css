@@ -1,0 +1,129 @@
+html,body{
+    min-width:320px;
+    margin:0;
+    font-size:14px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#e81e22;
+    box-sizing:border-box;
+    color:white;
+    font-family: 'Nanum Gothic', sans-serif;
+    padding:10px 5px;
+    position: fixed;
+    width:100%;
+    top:0;
+    font-weight:300;
+}
+
+#Plus{
+    background-color:white;
+    border:yellow 1px solid;
+}
+
+.header__title{
+    font-size:15px;
+    padding-left:55px;
+}
+
+.header__linker{
+    margin-left:auto;
+    text-decoration: none;
+    color:white;
+}
+
+.header , .header__title , .header__edit{
+    margin-left:auto;
+}
+
+.menus{
+    margin-top:38px;
+    padding:0px 0px 60px 0px;
+}
+
+.menu{
+    border-bottom:1px solid rgba(0,0,0,0.3);
+    padding:10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat__avartar{
+    width:50px;
+    height:50px;
+    border-radius:100px;
+}
+
+.menu__text{
+    flex-grow: 2;
+    margin-left:20px;
+}
+
+.menu__name{
+    display: block;
+    font-weight:600;
+    margin-top:4px;
+}
+
+
+.menu__last-date{
+    color:rgba(0,0,0,0.4);
+}
+
+/* footer */
+
+.footer{
+    position: fixed;
+    width:100%;
+    background-color:#e81e22;
+    bottom:0;
+    box-sizing: border-box;
+}
+
+.footer__form{
+    display: flex;
+    border-top:1px solid #c1c1c1;
+}
+
+#footer__changer{
+    width:100%;
+    padding:10px;
+    font-size:1rem;
+    outline:none;
+}
+
+#footer__submit{
+    padding:0 20px;
+    border:none;
+    background-color:gray;
+    outline:none;
+}
+
+#footer__icon{
+    color:white;
+}
+
+
+.footer__icon{
+    color:black;
+}
+
+.footer__text{
+    margin-top:5px;
+    font-size:10px;
+}
+
+.footer__icon{
+    color:#c1c1c1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:0px 0px;
+}
+
+.footer i{
+    font-size:1.2rem;
+}

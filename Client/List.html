@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit</title>
+    <link rel="stylesheet" href="./css/edit.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+          crossorigin="anonymous">
+</head>
+
+<body>
+<header class="header">
+    <!-- <button id="Plus">추가</button> -->
+    <span class="header__title">번개 Eat</span>
+    <a href="Main.html" class="header__linker">
+        <span class="header__edit"><i class="fas fa-angle-double-left header__back"></i> Back</span>
+    </a>
+</header>
+
+<section id="menus" class="menus">
+    <div class="menu">
+        <!-- <img src="img/preview_img.jpg" alt="" class="chat__avartar"> -->
+        <div class="menu__text">
+            <span class="menu__name">삼계탕</span>
+            <span class="menu__last-date">3일전</span>
+        </div>
+        <div class="menu__delete">
+            <i class="fas fa-trash-alt"></i>
+        </div>
+    </div>
+    <div class="menu">
+        <!-- <img src="img/preview_img.jpg" alt="" class="chat__avartar"> -->
+        <div class="menu__text">
+            <span class="menu__name">삼계탕</span>
+            <span class="menu__last-date">3일전</span>
+        </div>
+        <div class="menu__delete">
+            <i class="fas fa-trash-alt"></i>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <form name="insert" class="footer__form" method="post">
+        <input type="text" name="name" id="footer__changer" placeholder="메뉴를 추가/제거 해보세요!" onkeydown="mykeydown()">
+        <button type="button" value="" id="footer__submit" >
+            <i class="fas fa-bolt" id="footer__icon"></i>
+        </button>
+    </form>
+</footer>
+
+<!--
+<footer class="footer">
+    <div class="footer__icon">
+        <i class="fa fa-user"></i>
+        <span class="footer__text">Friends</span>
+    </div>
+    <div class="footer__icon">
+        <i class="fa fa-comment"></i>
+        <span class="footer__text">Chats</span>
+    </div>
+    <div class="footer__icon">
+        <i class="fa fa-book"></i>
+        <span class="footer__text">Channel</span>
+    </div>
+    <div class="footer__icon">
+        <i class="fa fa-ellipsis-h"></i>
+        <span class="footer__text">More</span>
+    </div>
+</footer>
+-->
+</div>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js "></script>
+<script src="js/edit.js" type="text/javascript"></script>
