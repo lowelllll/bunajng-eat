@@ -46,39 +46,74 @@ $("#footer__submit").on("click",() => {
         dataType:'json',
         type:'POST',
         data:FormData,
-        success:$.ajax({
-                url:'http://menubot.pythonanywhere.com/menu/',
-                dataType:'json',
-                method:'get',
-                success:(data) => {
-                    const id_value = data.id;
-                    const tag = `
+        success:() =>{
+            alert("success");
+        },
+        error:() =>{
+            alert("error");
+        }
+    })
+
+
+    $.ajax({
+        url:'http://menubot.pythonanywhere.com/menu/menus/',
+        dataType:'json',
+        method:'get',
+        success:(data) => {
+            const id_value = data.menus[0].id;
+            console.log(id_value);
+            /*
+            console.log(data.menus[0].id) + 1;
+
+            console.log(data.menus);
+            console.log("0번 ID : " + data.menus[0].id);
+            console.log("1번 ID : " + data.menus[1].id);
+
+            console.log("1번 ID + 1 : " + ++(data.menus[1].id));
+            */
+
+            const tag = `
                 <div class="menu">
                     <div class="menu__text">
                         <span class="menu__name">${FormData.name}</span>
                         <span class="menu__last-date">식사 기록 없음</span>
                     </div>
-                    <input type="hidden" class="id" value="${id_value}" />
+                   <input type="hidden" class="id" value="${id_value}" />
                     <div class="menu__delete">
                         <i class="fas fa-trash-alt"></i>
                     </div>
                 </div>
                 `;
-                    $(".menu:last-child").after(tag);
-                }
-            }),
-        error:() =>{
-            alert("error");
+            $(".menu:last-child").after(tag);
         }
     })
 });
 
 
+
 $("#menus").on("click", ".menu__delete", function() {
     const $menus = $(this).parent();
     const $input = $menus.find(".id");
-    const id = $input.val();
-    console.log('id', id)
+    const pk = $input.val();
+    console.log('id', pk);
+
+    $.ajax({
+        url:"http://menubot.pythonanywhere.com/menu/delete/",
+        dataType:'json',
+        type:'POST',
+        data:{
+            "pk":pk
+        },
+        success:function () {
+            alert("success")
+        },
+        error:function () {
+            alert("error")
+        }
+    })
+
+
+    $($menus).remove();
 });
 
 

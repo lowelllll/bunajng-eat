@@ -50,6 +50,9 @@ html,body{
     display: flex;
     justify-content: space-between;
 }
+.menu:first-child{
+    display: none;
+}
 
 .chat__avartar{
     width:50px;

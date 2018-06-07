@@ -38,18 +38,21 @@ $("button").on("click", () => {
         });
 
 
-/*
+
     $.ajax({
-        url:'http://menubot.pythonanywhere.com/menu/',
+        url:'http://menubot.pythonanywhere.com/menu/menus/',
         dataType:'json',
         method:'get',
         success: (data) => {
             console.log(data)
+            /*
             $(".section__result").html("오늘의 메뉴는 " + data.name + " 입니다");
             $(".section__picker").html("다시하기");
+            */
         }
     });
-    */
+
+
 });
 
 
