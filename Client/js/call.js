@@ -31,29 +31,13 @@ $("button").on("click", () => {
             const sectionResultEl = document.querySelector("#section__result");
             const sectionButton = document.querySelector(".section__picker");
             sectionResultEl.innerHTML = `오늘의 메뉴는 ${json.name} 입니다`;
-            sectionButton.innerHTML = `다시하기`;
+            $('button').attr("disabled","disabled");
         })
         .catch(error => {
             console.log('error', error);
         });
-
-
-
-    $.ajax({
-        url:'http://menubot.pythonanywhere.com/menu/menus/',
-        dataType:'json',
-        method:'get',
-        success: (data) => {
-            console.log(data)
-            /*
-            $(".section__result").html("오늘의 메뉴는 " + data.name + " 입니다");
-            $(".section__picker").html("다시하기");
-            */
-        }
-    });
-
-
 });
+
 
 
 

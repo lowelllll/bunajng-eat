@@ -15,82 +15,64 @@ $.fn.serializeObject = function()
     return o;
 };
 
-let max = 0;
-let min = 18;
-
-let makeRandom = (a,b) => Math.floor(Math.random() * (a-b)+ b);
-
-
-const ROOT_URL = 'http://menubot.pythonanywhere.com/menu/menus/'
-
+// 버튼 색 변화
 function mykeydown() {
         document.getElementById('footer__changer').addEventListener('keyup', function(e){
-            if(e.target.selectionStart == 0){
-                document.getElementById("footer__submit").style.backgroundColor = "gray";
+            const footerSubmitEl = document.getElementById("footer__submit")
+            if(e.target.selectionStart === 0){
+                footerSubmitEl.style.backgroundColor = "gray";
                 document.getElementById("footer__icon").style.color = "white";
             }
             else{
-                document.getElementById("footer__submit").style.backgroundColor = "red";
+                footerSubmitEl.style.backgroundColor = "red";
                 document.getElementById("footer__icon").style.color = "yellow";
             }
         })
 
 }
 
+// 메뉴 생
+$("#footer__submit").on("click",() => { // submit
+    // e.preventDefault();
 
-$("#footer__submit").on("click",() => {
-    let FormData  = $("#footer__changer").serializeObject();
+    let FormData  = $("#footer__changer").val();
     console.log(FormData);
     $.ajax({
         url:"http://menubot.pythonanywhere.com/menu/create/",
         dataType:'json',
         type:'POST',
-        data:FormData,
-        success:() =>{
-            alert("success");
+        data:{
+            'name':FormData
         },
-        error:() =>{
-            alert("error");
-        }
-    })
-
-
-    $.ajax({
-        url:'http://menubot.pythonanywhere.com/menu/menus/',
-        dataType:'json',
-        method:'get',
-        success:(data) => {
-            const id_value = data.menus[0].id;
-            console.log(id_value);
-            /*
-            console.log(data.menus[0].id) + 1;
-
-            console.log(data.menus);
-            console.log("0번 ID : " + data.menus[0].id);
-            console.log("1번 ID : " + data.menus[1].id);
-
-            console.log("1번 ID + 1 : " + ++(data.menus[1].id));
-            */
+        success:(data) =>{
+            $("#footer__changer").val("");
+            const name = data['name'];
+            const id = data['id'];
+            const last_date = data['last_date'];
 
             const tag = `
                 <div class="menu">
                     <div class="menu__text">
-                        <span class="menu__name">${FormData.name}</span>
-                        <span class="menu__last-date">식사 기록 없음</span>
+                        <span class="menu__name">${name}</span>
+                        <span class="menu__last-date">${last_date==null?'먹은 적 없음':last_date}</span>
                     </div>
-                   <input type="hidden" class="id" value="${id_value}" />
+                    <input type="hidden" class="id" value="${id}" />
+
                     <div class="menu__delete">
                         <i class="fas fa-trash-alt"></i>
                     </div>
                 </div>
                 `;
-            $(".menu:last-child").after(tag);
+            $(".menus").prepend(tag);
+        },
+        error:() =>{
+            console.log("error");
         }
     })
+
 });
 
-
-
+// 삭제
 $("#menus").on("click", ".menu__delete", function() {
     const $menus = $(this).parent();
     const $input = $menus.find(".id");
@@ -105,7 +87,7 @@ $("#menus").on("click", ".menu__delete", function() {
             "pk":pk
         },
         success:function () {
-            alert("success")
+            //alert("success")
         },
         error:function () {
             alert("error")
@@ -116,4 +98,29 @@ $("#menus").on("click", ".menu__delete", function() {
     $($menus).remove();
 });
 
-
+$.ajax({
+    url:'http://menubot.pythonanywhere.com/menu/menus/',
+    dataType:'json',
+    method:'get',
+    success:function (data) {
+        for(let i=0;i<data.menus.length;i++){
+            let name = data.menus[i]['name'];
+            console.log(name);
+            let id = data.menus[i]['id'];
+            let last_date = data.menus[i]['last_date'];
+            const tag = `
+                <div class="menu">
+                    <div class="menu__text">
+                        <span class="menu__name">${name}</span>
+                        <span class="menu__last-date">${last_date === null ? '먹은 적 없음' : last_date}</span>
+                    </div>
+                    <input type="hidden" class="id" value="${id}" />
+                    <div class="menu__delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+            `;
+            $(".menus").append(tag);
+        }
+    }
+})

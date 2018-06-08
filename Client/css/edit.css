@@ -3,6 +3,7 @@ html,body{
     margin:0;
     font-size:14px;
 }
+
 .header{
     display: flex;
     justify-content: space-between;
@@ -49,9 +50,7 @@ html,body{
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-}
-.menu:first-child{
-    display: none;
+    order:revert;
 }
 
 .chat__avartar{
@@ -59,6 +58,8 @@ html,body{
     height:50px;
     border-radius:100px;
 }
+.chat__avartar.red { }
+.chat__avartar.blue { }
 
 .menu__text{
     flex-grow: 2;

@@ -3,7 +3,7 @@
 *{
     margin:0;
     padding:0;
-    font-family: 'Nanum Gothic', sans-serif;
+    /*     font-family: 'Nanum Gothic', sans-serif; */
 }
 
 html{
@@ -16,7 +16,8 @@ html,body{
 
 #wrap{
     height:100%;
-    background-color:#e81e22;
+    /*background-color:#e81e22;*/
+    background-color:white;
     min-width:320px;
 }
 
@@ -25,12 +26,12 @@ html,body{
     flex-direction: row-reverse;
 }
 
-.fa-plus-circle{
-    font-size:2.2rem;
-    color:white;
+.fa-cog{
+    font-size:1.8rem;
+    color:#e81e22;
     margin:10px 10px 0 0;
-    border-radius:100px;
-    box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5);
+    border-radius:100%;
+    /*box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5);*/
 }
 
 /* section */
@@ -52,6 +53,7 @@ html,body{
 .section__logo{
     font-size:3.5rem;
     font-weight:bold;
+
 }
 
 .section__starter{
@@ -64,7 +66,8 @@ html,body{
 }
 
 #section__result{
-    font-size:20px;
+    margin-top:30px;
+    font-size:1.5rem;
 }
 
 .section__picker{
@@ -73,23 +76,39 @@ html,body{
     border-radius:10px;
     padding:10px 50px;
     font-size:1.3rem;
-    margin-top:30px;
-    background-color:white;
-    box-shadow: 0 4px 0 0 #A4A4A4;
+    margin-top:10px;
+    background-color:#fed330;
+    box-shadow: 0 4px 0 0 #f7b731;
     outline: none;
 }
 
 .section__picker:active{
     cursor:none;
-    margin-top:33px; box-shadow: none;
+    margin-top:13px; box-shadow: none;
 }
 
 .section__comment{
     font-size:17px;
 }
 
+#section__title{
+    color:#e81e22;
+    font-weight:bold;
+}
+
+
 .fa-utensils{
     margin-top:10px;
-    font-size:60px;
-    color:white;
+    font-size:4.5rem;
+    color:#e81e22;
+}
+
+.fa-bolt{
+    position: absolute;
+    left:50%;
+    transform:translateX(-50%);
+    margin-left:5px;
+    margin-top:25px;
+    color:#fed330;
+    font-size:3rem;
 }
