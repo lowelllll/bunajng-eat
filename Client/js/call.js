@@ -18,7 +18,7 @@ $("button").on("click", function () {
 
 
 $("button").on("click", () => {
-    fetch('http://menubot.pythonanywhere.com/menu/')
+    fetch('//menubot.pythonanywhere.com/menu/')
         .then(response => {
             // ...
             if (response.status === 404) {

@@ -41,7 +41,7 @@ html,body{
 
 .menus{
     margin-top:38px;
-    padding:0px 0px 60px 0px;
+    padding:0px 0px 40px 0px;
 }
 
 .menu{
@@ -58,9 +58,6 @@ html,body{
     height:50px;
     border-radius:100px;
 }
-.chat__avartar.red { }
-.chat__avartar.blue { }
-
 .menu__text{
     flex-grow: 2;
     margin-left:20px;
