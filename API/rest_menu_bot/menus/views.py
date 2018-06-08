@@ -1,11 +1,11 @@
 import datetime
 from django.shortcuts import render
-from .serializers import MenuSerializer
-from .models import Menu
+from .serializers import MenuSerializer,RestaurantSerializer
+from .models import Menu,Restaurant
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
+from rest_framework.views import APIView
 
 class MenuView(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
@@ -27,3 +27,8 @@ class MenuView(viewsets.ModelViewSet):
         serializer = self.get_serializer(menu)
         return Response(serializer.data)
 
+class RestaurantListView(APIView):
+    def get(self,request):
+        restaurant = Restaurant.objects.all()
+        serializer = RestaurantSerializer(restaurant,many=True)
+        return Response(serializer.data)

@@ -27,3 +27,13 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.name
+
+# 맛집
+class Restaurant(models.Model):
+    name = models.CharField(max_length=30)
+    kind = models.CharField(max_length=20)
+    link = models.URLField()
+    img_link = models.URLField()
+
+    def __str__(self):
+        return self.name
