@@ -19,10 +19,6 @@ html,body{
     font-weight:300;
 }
 
-#Plus{
-    background-color:white;
-    border:yellow 1px solid;
-}
 
 .header__title{
     font-size:15px;
@@ -40,8 +36,8 @@ html,body{
 }
 
 .menus{
-    margin-top:38px;
-    padding:0px 0px 40px 0px;
+    margin-top:40px;
+    padding:10px 15px 40px 15px;
 }
 
 .menu{
@@ -123,6 +119,10 @@ html,body{
     flex-direction: column;
     align-items: center;
     padding:0px 0px;
+}
+
+.menu__delete{
+    height:10px;
 }
 
 .footer i{

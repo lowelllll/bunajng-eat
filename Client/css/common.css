@@ -16,7 +16,6 @@ html,body{
 
 #wrap{
     height:100%;
-    /*background-color:#e81e22;*/
     background-color:white;
     min-width:320px;
 }
@@ -31,7 +30,6 @@ html,body{
     color:#e81e22;
     margin:10px 10px 0 0;
     border-radius:100%;
-    /*box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5);*/
 }
 
 /* section */
@@ -43,7 +41,7 @@ html,body{
 }
 
 
-.section__content-1{
+.section__content{
     display: flex;
     flex-direction:column;
     justify-content:space-around;
@@ -56,10 +54,6 @@ html,body{
 
 }
 
-.section__starter{
-}
-
-
 .section__result{
     margin-top:30px;
     font-size:1.5rem;
@@ -71,6 +65,7 @@ html,body{
 }
 
 .section__picker{
+    margin:0 auto;
     width:70%;
     border:none;
     border-radius:10px;
