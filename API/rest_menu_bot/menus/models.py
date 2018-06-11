@@ -1,6 +1,12 @@
+# -*- coding:utf-8 -*-
+from random import randint
 from django.db import models
 from django.db.models.aggregates import Count
-from random import randint
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
+
 
 class RandomManager(models.Manager):
     use_for_related_fields = True
@@ -37,3 +43,9 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.name
+
+# user 생성할 때 token 생성
+@receiver(post_save,sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender,instance=None,created=False,**kwargs):
+    if created:
+        Token.objects.create(user=instance)

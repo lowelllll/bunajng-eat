@@ -1,15 +1,16 @@
 import datetime
 from django.shortcuts import render
-from .serializers import MenuSerializer,RestaurantSerializer
-from .models import Menu,Restaurant
-from rest_framework import viewsets
+from rest_framework import viewsets , permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .serializers import MenuSerializer,RestaurantSerializer
+from .models import Menu,Restaurant
 
 class MenuView(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+    permission_classes = (permissions.IsAuthenticated,)
 
     @action(detail=False) # router add
     def random(self,request):
@@ -21,9 +22,9 @@ class MenuView(viewsets.ModelViewSet):
             dt = today - menu.last_date
             if dt.days > 6:
                 break
-        # menu.last_date = today
-        # menu.save()
 
+        menu.last_date = today
+        menu.save()
         serializer = self.get_serializer(menu)
         return Response(serializer.data)
 
