@@ -46,7 +46,6 @@ def restaurant_parser():
 
 if __name__ == "__main__":
     restaruants = restaurant_parser()
-    print(restaruants)
     for restaruant in restaruants:
         Restaurant(
             name=restaruant['title'],
