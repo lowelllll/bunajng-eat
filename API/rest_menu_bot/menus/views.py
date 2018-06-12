@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import datetime
 from django.shortcuts import render
 from rest_framework import viewsets , permissions
@@ -15,13 +16,16 @@ class MenuView(viewsets.ModelViewSet):
     @action(detail=False) # router add
     def random(self,request):
         today = datetime.datetime.now(datetime.timezone.utc)
-        while True:
+        count = 0
+        max_count = 30
+        while count < max_count: # 최대 30번 미만만 돌리도록 함.
             menu = Menu.objects.random()
             if not menu.last_date:
                 break
             dt = today - menu.last_date
             if dt.days > 6:
                 break
+            count += 1
 
         menu.last_date = today
         menu.save()
