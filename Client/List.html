@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit</title>
+    <title>번개잇</title>
     <link rel="stylesheet" href="./css/edit.css">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -17,21 +17,23 @@
     <a href="Main.html" class="header__linker">
         <span class="header__edit">
             <i class="fas fa-angle-double-left header__back"></i>
-            Back</span>
+            Back
+        </span>
     </a>
 </header>
 
 <section id="menus" class="menus"></section>
 
 <footer class="footer">
-    <form name="insert" class="footer__form">
+    <form name="insert" class="footer__form" onsubmit="return false">
         <input
                 type="text"
                 name="name"
                 id="footer__changer"
                 placeholder="메뉴를 추가/제거 해보세요!"
         />
-        <button type="submit" id="footer__submit">
+
+        <button type="submit" id="footer__submit" >
             <i class="fas fa-bolt" id="footer__icon"></i>
         </button>
     </form>

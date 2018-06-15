@@ -1,55 +1,57 @@
-$.fn.serializeObject = function()
-{
-    var o = {};
-    var a = this.serializeArray();
-    $.each(a, function() {
-        if (o[this.name]) {
-            if (!o[this.name].push) {
-                o[this.name] = [o[this.name]];
-            }
-            o[this.name].push(this.value || '');
-        } else {
-            o[this.name] = this.value || '';
-        }
-    });
-    return o;
-};
+const token = localStorage.getItem("token");
+(function () {
+    if(token === null){
+        alert("로그인이 필요한 서비스입니다 \n로그인 페이지로 이동합니다");
+        location.href = "Login.html";
+    }
+    else{
+        return;
+    }
+})();
 
 // 버튼 색 변화
 const input = document.getElementById('footer__changer');
 input.onkeydown = function() {
-        document.getElementById('footer__changer').addEventListener('keyup', function(e){
-            const footerSubmitEl = document.getElementById("footer__submit")
-            if(e.target.selectionStart === 0){
-                footerSubmitEl.style.backgroundColor = "gray";
-                document.getElementById("footer__icon").style.color = "white";
-            }
-            else{
-                footerSubmitEl.style.backgroundColor = "red";
-                document.getElementById("footer__icon").style.color = "yellow";
-            }
-        })
-
+    document.getElementById('footer__changer').addEventListener('keyup', function(e) {
+        const footerSubmitEl = document.querySelector("#footer__submit");
+        const footerIconEl = document.querySelector("#footer__icon");
+        if (e.target.selectionStart === 0) {
+            footerSubmitEl.setAttribute("style", "background-color:gray");
+            footerIconEl.setAttribute("style", "color:white");
+        } else {
+            footerSubmitEl.setAttribute("style", "background-color:red");
+            footerIconEl.setAttribute("style", "color:yellow");
+        }
+    })
 }
 
+
 // 메뉴 추가
-$("#footer__submit").on("click",() => { // submit
-    // e.preventDefault();
-    let FormData  = $("#footer__changer").val();
-    console.log(FormData);
-    $.ajax({
-        url:"//menubot.pythonanywhere.com/menu/create/",
-        dataType:'json',
-        type:'POST',
-        data:{
-            'name':FormData
+const FooterForm = document.querySelector('.footer__form');
+FooterForm.addEventListener('submit', function() {
+
+    const Form = document.querySelector("#footer__changer").value;
+    if (Form === "") {
+        alert("내용을 입력해주세요");
+        return false;
+    }
+    const SendFormData = new FormData();
+    SendFormData.append("name", Form);
+
+    fetch("//bunjangeat.herokuapp.com/menus/", {
+        headers:{
+            'Authorization':`Token ${token}`
         },
-        success:(data) =>{
-            $("#footer__changer").val("");
+        method: "POST",
+        body: SendFormData
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+            const $menus = document.querySelector(".menus");
+            document.querySelector("#footer__changer").value = "";
             const name = data['name'];
             const id = data['id'];
             const last_date = data['last_date'];
-
             const tag = `
                 <div class="menu">
                     <div class="menu__text">
@@ -63,94 +65,97 @@ $("#footer__submit").on("click",() => { // submit
                     </div>
                 </div>
                 `;
-            $(".menus").prepend(tag);
-        },
-        error:() =>{
-            console.log("error");
-        }
-    })
+            $menus.insertAdjacentHTML("afterbegin", tag);
+        })
     return false;
-});
+})
+
 
 // 메뉴 삭제
-$("#menus").on("click", ".menu__delete", function() {
+const menus = document.querySelector("#menus");
+menus.addEventListener("click", function() {
+
     const check = confirm("삭제하시겠습니까?");
-    if(check === true){
-        const $menus = $(this).parent();
-        const $input = $menus.find(".id");
-        const pk = $input.val();
+    if (check === true) {
+        const md = document.querySelector(".menu__delete");
+        const $menus = md.parentElement;
+        const $input = $menus.querySelector(".id");
+        const pk = $input.value;
         console.log('id', pk);
 
-        $.ajax({
-            url:"//menubot.pythonanywhere.com/menu/delete/",
-            dataType:'json',
-            type:'POST',
-            data:{
-                "pk":pk
+        const formData = new FormData();
+        formData.append('pk', pk);
+        fetch(`//bunjangeat.herokuapp.com/menus/${pk}/`, {
+            headers:{
+                'Authorization':`Token ${token}`
             },
-            success:function () {
-                //alert("success")
-            },
-            error:function () {
-                alert("error");
-            }
+            method: 'DELETE',
+            body: formData
+        }).then(() => {
+            $menus.remove();
         })
-        $($menus).remove();
     }
-});
+})
+
 
 // 마지막으로 먹은 날 계산
 
-function date_calc(temp_date){
+function date_calc(temp_date) {
     const date = new Date();
     const yy = date.getFullYear();
-    let mm = date.getMonth()+1;
+    let mm = date.getMonth() + 1;
     let dd = date.getDate();
-    if(dd<10) { dd='0'+dd };
-    if(mm<10) { mm='0'+mm };
+    if (dd < 10) {
+        dd = '0' + dd
+    };
+    if (mm < 10) {
+        mm = '0' + mm
+    };
     const temp_today = `${yy}-${mm}-${dd}`;
-    let result = null;
+    let result;
 
-    if(!(temp_date === null)){
-        temp_date = temp_date.toString().substr(0,10);
+    if (!(temp_date === null)) {
+        temp_date = temp_date.toString().substr(0, 10);
         const dateArray = temp_date.split("-");
         const todayArray = temp_today.split("-");
 
-        const last_date = new Date(dateArray[0],dateArray[1],dateArray[2]);
-        const today = new Date(todayArray[0],todayArray[1],todayArray[2]);
+        const last_date = new Date(dateArray[0], dateArray[1], dateArray[2]);
+        const today = new Date(todayArray[0], todayArray[1], todayArray[2]);
 
+        const dt = (today.getTime() - last_date.getTime()) / 1000 / 60 / 60 / 24;
 
-        const dt = (today.getTime() - last_date.getTime())/ 1000 / 60 / 60 / 24;;
-
-        if(dt === 0){
+        if (dt === 0) {
             result = "오늘 먹음";
-        }
-        else if(dt < 31){
+        } else if (dt < 31) {
             result = `${dt}일 전 먹음`;
-        }
-        else {
+        } else {
             result = last_date;
         }
-    }
-    else{
+    } else {
         result = "먹지 않음";
     }
     return result;
 }
 
+
 // 페이지 로딩 시 전체 리스트를 출력
 
-$.ajax({
-    url:'//menubot.pythonanywhere.com/menu/menus/',
-    dataType:'json',
-    method:'get',
-    success:function (data) {
-        for(let i=0;i<data.menus.length;i++){
-            const last_date= date_calc(data.menus[i]['last_date']);
-            const name = data.menus[i]['name'];
-            const id = data.menus[i]['id'];
-
-            const tag = `
+fetch('//bunjangeat.herokuapp.com/menus/',{
+    headers:{
+        'Authorization':`Token ${token}`
+    },
+    dataType: 'json',
+    method: 'GET'
+}).then(response => {
+    return response.json();
+}).then(data => {
+    console.log(data);
+    const $menus = document.querySelector(".menus");
+    for (let i = 0; i < data.results.length; i++) {
+        const last_date = date_calc(data.results[i]['last_date']);
+        const name = data.results[i]['name'];
+        const id = data.results[i]['id'];
+        const tag = `
                 <div class="menu">
                     <div class="menu__text">
                         <span class="menu__name">${name}</span>
@@ -162,8 +167,6 @@ $.ajax({
                     </div>
                 </div>
             `;
-            $(".menus").append(tag);
-        }
+        $menus.insertAdjacentHTML("beforeend", tag);
     }
 })
-

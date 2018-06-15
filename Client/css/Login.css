@@ -1,0 +1,123 @@
+html,body{
+    height:100%;
+    margin:0;
+}
+
+html{
+    font-size:15px;
+}
+
+#wrap{
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+}
+
+.login{
+    width:100%;
+    padding:20px;
+
+}
+/* Main Logo */
+
+.login__icon{
+    display: flex;
+    justify-content: center;
+}
+
+.fa-utensils{
+    border-radius:100px;
+    border:2px solid #fff200;
+    font-size:4rem;
+    color:#e81e22;
+    padding:16px 23px;
+}
+
+.fa-bolt{
+    position: absolute;
+    left:50%;
+    transform:translateX(-50%);
+    margin-left:5px;
+    margin-top:-45px;
+    color:#fed330;
+    font-size:3rem;
+}
+
+
+/* Login Form */
+
+.login__input-box{
+    display: flex;
+    justify-content: center;
+}
+
+.login__input-form{
+    width:90%;
+    padding:20px 0px;
+}
+
+.login__idWrap{
+    display: flex;
+    flex-direction: column;
+}
+
+.login__PassWordWrap{
+    margin-top:20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login__Text{
+    letter-spacing:0.7px;
+    color:#fd999a;
+    background-color:white;
+    position: absolute;
+    margin-top:-7px;
+    padding:0 3px;
+    margin-left:8px;
+    font-size:0.9rem;
+}
+
+
+.login__Input{
+    font-size:0.8rem;
+    outline:none;
+    padding:12px 0px 12px 14px;
+    border-radius:5px;
+    border:1px solid #fd999a;
+}
+
+/* Submit Button */
+
+.login__submit{
+    width:100%;
+    border-radius:100px;
+    margin-top:50px;
+    padding:10px 20px;
+    font-size:1rem;
+    background: linear-gradient(-45deg, #f5ce62, #fc6076, #fa7199, #e85a19);
+    background-size:400% 400%;
+    animation: Gradient 10s ease infinite;
+    color:white;
+    text-shadow: 1px 1px 5px gray;
+    box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+    border:none;
+}
+
+
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+
+

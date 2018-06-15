@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>번개잇</title>
+    <link rel="stylesheet" href="./css/Login.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div id="wrap">
+        <div class="login">
+            <div class="login__icon">
+                <i class="fas fa-utensils">
+                    <i class="fas fa-bolt" id="footer__icon"></i>
+                </i>
+            </div>
+            <div class="login__input-box">
+                <form class="login__input-form" onsubmit="return false">
+                    <div class="login__idWrap">
+                        <span class="login__Text">UserName</span>
+                        <input type="text" id="id" class="login__Input" placeholder="UserName">
+                    </div>
+                    <div class="login__PassWordWrap">
+                        <span class="login__Text">PassWord</span>
+                        <input type="password" id="pw" class="login__Input" placeholder="PassWord">
+                    </div>
+                    <button type="submit" class="login__submit">LogIn</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/Login.js" type="text/javascript"></script>
+</html>
