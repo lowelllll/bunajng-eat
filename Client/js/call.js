@@ -2,6 +2,32 @@ const button = document.querySelector('.section__picker');
 const edit = document.querySelector('.fa-cog');
 const token = localStorage.getItem("token");
 const LoginLink = "Login.html";
+const $footer = document.querySelector(".footer");
+
+
+if(token !== null){
+    const tag =
+        `<div class="footer__logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="footer__outText">LogOut</span>
+        </div>`
+    $footer.insertAdjacentHTML("afterbegin", tag);
+
+    document.querySelector(".footer__logout").addEventListener('click', () => {
+        const check = confirm("로그아웃 하시겠습니까?");
+        if(check === true){
+            localStorage.removeItem("token");
+            document.querySelector(".footer__logout").remove();
+            alert("로그아웃 되었습니다.");
+            location.reload();
+        }
+        else{
+            return;
+        }
+    });
+}
+
+
 
 button.addEventListener('click', () => {
     if(token !== null){

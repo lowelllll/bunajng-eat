@@ -21,7 +21,12 @@ html,body{
 
 .header{
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
+    flex-direction:row-reverse;
+}
+
+.fa-sign-out-alt{
+    font-size:1.8rem;
 }
 
 .fa-cog{
@@ -53,13 +58,8 @@ html,body{
 
 }
 
-.section__result{
-    margin-top:30px;
-    font-size:1.5rem;
-}
-
 #section__result{
-    margin-top:30px;
+    margin-top:20px;
     font-size:1.5rem;
 }
 
@@ -67,10 +67,10 @@ html,body{
     margin:0 auto;
     width:70%;
     border:none;
+    margin-top:10px;
     border-radius:10px;
     padding:10px 50px;
     font-size:1.3rem;
-    margin-top:10px;
     background-color:#fed330;
     box-shadow: 0 4px 0 0 #f7b731;
     outline: none;
@@ -105,4 +105,27 @@ html,body{
     margin-top:25px;
     color:#fed330;
     font-size:3rem;
+}
+
+.footer{
+    position: absolute;
+    margin-bottom:3px;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+
+.footer__logout{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__outText{
+    margin-top:1px;
+    font-size:1rem;
+    font-weight:bold;
+    margin-left:3px;
 }
