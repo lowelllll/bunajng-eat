@@ -1,7 +1,7 @@
 const Form = document.querySelector(".login__input-form")
 Form.addEventListener("submit",function () {
-    const FormId = Form.id.value;
-    const FormPw = Form.pw.value;
+    const FormId = Form.id.value.toLowerCase();
+    const FormPw = Form.pw.value.toLowerCase();
     if (FormId === "" || FormPw === "") {
         alert("아이디 혹은 비밀번호가 공백입니다");
         return false;
@@ -30,7 +30,8 @@ Form.addEventListener("submit",function () {
             Form.id.value = "";
             Form.pw.value = "";
             localStorage.setItem("token",token.token);
-            alert(`인증회원 : [ ${FormId} ]\n로그인에 성공했습니다\n확인 혹은 Enter를 누르시면 메인 페이지로 이동합니다`);
+            const Name = FormId.charAt(0).toUpperCase() + FormId.slice(1);
+            alert(`인증회원 : [ ${Name} ]\n로그인에 성공했습니다\n확인 혹은 Enter를 누르시면 메인 페이지로 이동합니다`);
             location.href = "Main.html";
         }
     })

@@ -1,13 +1,17 @@
 const button = document.querySelector('.section__picker');
 const edit = document.querySelector('.fa-cog');
 const token = localStorage.getItem("token");
-const LoginLink = "login.html";
+const LoginLink = "Login.html";
 
 button.addEventListener('click', () => {
     if(token !== null){
         const button = document.querySelector(".section__picker");
-        fetch('//menubot.pythonanywhere.com/menu/')
-            .then(response => {
+        fetch('//bunjangeat.herokuapp.com/menus/random/',{
+            headers:{
+                'Authorization':`Token ${token}`
+            },
+            method: "get"
+        }).then(response => {
                 // ...
                 /*
                 if (response.status === 404) {
@@ -17,7 +21,6 @@ button.addEventListener('click', () => {
                 return response.json();
             })
             .then(json => {
-                console.log(json);
                 const sectionResultEl = document.querySelector("#section__result");
                 sectionResultEl.innerHTML = `오늘의 메뉴는 ${json.name} 입니다`;
                 button.setAttribute("disabled",false);

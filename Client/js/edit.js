@@ -81,7 +81,6 @@ menus.addEventListener("click", function() {
         const $menus = md.parentElement;
         const $input = $menus.querySelector(".id");
         const pk = $input.value;
-        console.log('id', pk);
 
         const formData = new FormData();
         formData.append('pk', pk);
@@ -149,7 +148,6 @@ fetch('//bunjangeat.herokuapp.com/menus/',{
 }).then(response => {
     return response.json();
 }).then(data => {
-    console.log(data);
     const $menus = document.querySelector(".menus");
     for (let i = 0; i < data.results.length; i++) {
         const last_date = date_calc(data.results[i]['last_date']);
