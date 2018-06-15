@@ -30,7 +30,7 @@ Form.addEventListener("submit",function () {
             Form.id.value = "";
             Form.pw.value = "";
             localStorage.setItem("token",token.token);
-            const Name = FormId.charAt(0).toUpperCase() + FormId.slice(1);
+            const Name = FormId.toUpperCase();
             alert(`인증회원 : [ ${Name} ]\n로그인에 성공했습니다\n확인 혹은 Enter를 누르시면 메인 페이지로 이동합니다`);
             location.href = "Main.html";
         }
