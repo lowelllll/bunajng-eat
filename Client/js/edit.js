@@ -1,3 +1,5 @@
+// 토큰 인증
+
 const token = localStorage.getItem("token");
 (function () {
     if(token === null){
@@ -8,6 +10,7 @@ const token = localStorage.getItem("token");
         return;
     }
 })();
+
 
 // 버튼 색 변화
 const input = document.getElementById('footer__changer');
@@ -59,9 +62,8 @@ FooterForm.addEventListener('submit', function() {
                         <span class="menu__last-date">${last_date==null?'먹은 적 없음':last_date}</span>
                     </div>
                     <input type="hidden" class="id" value="${id}" />
-
-                    <div class="menu__delete">
-                        <i class="fas fa-trash-alt"></i>
+                    <div class="menu__delete">         
+                        <i class="fas fa-trash-alt" onclick="deleter()"></i>
                     </div>
                 </div>
                 `;
@@ -72,29 +74,38 @@ FooterForm.addEventListener('submit', function() {
 
 
 // 메뉴 삭제
-const menus = document.querySelector("#menus");
-menus.addEventListener("click", function() {
 
+function deleter() {
     const check = confirm("삭제하시겠습니까?");
     if (check === true) {
-        const md = document.querySelector(".menu__delete");
-        const $menus = md.parentElement;
-        const $input = $menus.querySelector(".id");
-        const pk = $input.value;
 
-        const formData = new FormData();
-        formData.append('pk', pk);
-        fetch(`//bunjangeat.herokuapp.com/menus/${pk}/`, {
-            headers:{
-                'Authorization':`Token ${token}`
-            },
-            method: 'DELETE',
-            body: formData
-        }).then(() => {
-            $menus.remove();
-        })
+        const $menu = document.querySelectorAll('.menu');
+
+        function deleteClick(idx) {
+            $menu[idx].onclick = function () {
+                const $input = $menu[idx].querySelector(".id");
+                const pk = $input.value;
+
+                const formData = new FormData();
+                formData.append('pk', pk);
+                fetch(`//bunjangeat.herokuapp.com/menus/${pk}/`, {
+                    headers: {
+                        'Authorization': `Token ${token}`
+                    },
+                    method: 'DELETE',
+                    body: formData
+                }).then(() => {
+                    $menu[idx].remove();
+                })
+            };
+        }
+
+        for (let i = 0; i < $menu.length; i++) {
+            deleteClick(i);
+        }
     }
-})
+}
+
 
 
 // 마지막으로 먹은 날 계산
@@ -161,7 +172,7 @@ fetch('//bunjangeat.herokuapp.com/menus/',{
                     </div>
                     <input type="hidden" class="id" value="${id}" />
                     <div class="menu__delete">
-                        <i class="fas fa-trash-alt"></i>
+                        <i class="fas fa-trash-alt" onclick="deleter()"></i>
                     </div>
                 </div>
             `;
